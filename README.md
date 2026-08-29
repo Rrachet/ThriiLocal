@@ -39,7 +39,7 @@ Faster hiring decision
 
 ## Product journey
 
-Thrii is also the clearest example of my **product + engineering** background working together.
+Thrii is the clearest example of my **product + engineering** background working together.
 
 My work around the product has included:
 
