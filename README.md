@@ -1,45 +1,83 @@
 # Thrii.io
 
-## Recruitment platform built for India's MSMEs
+### Recruitment infrastructure for India's MSMEs
 
-**Thrii** is a recruitment platform focused on helping Indian MSMEs hire faster through structured hiring workflows, intelligent candidate matching, and recruiter-led candidate validation.
+[![Live Product](https://img.shields.io/badge/Live-thrii.io-111111?style=flat-square)](https://www.thrii.io/) [![Product](https://img.shields.io/badge/Focus-Recruitment-111111?style=flat-square)](#product)
 
-### What Thrii does
+> **Fewer, more relevant candidates. Faster hiring.**
 
-Thrii helps businesses:
+[Thrii](https://www.thrii.io/) is a recruitment platform focused on helping Indian MSMEs hire faster through structured hiring workflows, relevant candidate matching, and recruiter-led validation.
 
-- Structure and clarify hiring requirements
-- Match roles with relevant candidate profiles
-- Reduce CV noise and manual screening effort
-- Work with recruiter validation alongside technology-driven matching
-- Move from an open role to a focused shortlist faster
+## Product
 
-### Core positioning
+Thrii is designed around a simple hiring problem: employers do not need more CV volume — they need a focused shortlist they can act on.
 
-> **Thrii is a recruitment platform built for India's MSMEs.**
+The product proposition is centered on helping businesses receive **3 relevant, vetted candidate profiles within 72 hours**, subject to role requirements and candidate availability.
 
-Thrii's hiring proposition is centered on helping businesses receive **3 relevant, vetted candidate profiles within 72 hours**, subject to role requirements and candidate availability.
+### Core workflow
 
-### Who Thrii is for
+```text
+Hiring requirement
+        ↓
+Role clarification
+        ↓
+Candidate matching
+        ↓
+Recruiter validation
+        ↓
+Focused shortlist
+        ↓
+Faster hiring decision
+```
 
-- Indian MSMEs
-- Small and growing businesses
-- Employers hiring for multiple roles
+### Who it serves
+
+- Indian MSMEs and growing businesses
+- Employers hiring across multiple roles
 - Recruitment teams and recruiters
 - Businesses looking for an alternative to high-volume job-board workflows
 
-### Key concepts
+## Product journey
 
-`MSME recruitment` · `recruitment platform` · `India hiring` · `candidate matching` · `AI-assisted recruitment` · `human recruiter validation` · `fast hiring` · `recruitment workflow`
+Thrii is also the clearest example of my **product + engineering** background working together.
 
-### Website
+My work around the product has included:
 
-[thrii.io](https://www.thrii.io/)
+- Product discovery and requirement shaping
+- End-to-end **Product Development Life Cycle (PDLC)** coordination
+- Translating business requirements into product priorities and execution
+- Collaborating with engineering and contributing from a full-stack development background
+- Iterating on user workflows, positioning, and product experience
+- Supporting launch and go-to-market execution
+- **Product Hunt and G2 product listing / positioning**
 
-### Product principle
+## Product principles
 
-Thrii focuses on **fewer, more relevant candidates rather than overwhelming employers with CV volume**. Technology helps with matching and workflow efficiency, while recruiter validation keeps candidate selection grounded in hiring requirements.
+**Relevance over volume**  
+Keep the hiring funnel focused instead of overwhelming employers with candidate volume.
+
+**Technology + human validation**  
+Use technology to improve matching and workflow efficiency while retaining recruiter validation where it matters.
+
+**Outcome-oriented workflows**  
+Design each step around moving an employer closer to a hiring decision.
+
+## Product surface
+
+| Area | Focus |
+|---|---|
+| Hiring requirements | Structure the role and clarify what matters |
+| Candidate matching | Surface relevant candidate profiles |
+| Validation | Add recruiter-led quality checks |
+| Shortlisting | Reduce noise and decision overhead |
+| Go-to-market | Product positioning and launch execution |
+
+## Website
+
+🌐 **https://www.thrii.io/**
 
 ## About this repository
 
 This repository is the local development codebase for Thrii.io. Product, application, and website implementation may evolve independently from this documentation.
+
+> **Problem → Product → Build → Launch → Learn**
