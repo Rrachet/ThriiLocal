@@ -1,83 +1,54 @@
-# Thrii.io
+# ThriiLocal
 
-### Recruitment infrastructure for India's MSMEs
+### Thrii.io — hiring, restructured
 
-[![Live Product](https://img.shields.io/badge/Live-thrii.io-111111?style=flat-square)](https://www.thrii.io/) [![Product](https://img.shields.io/badge/Focus-Recruitment-111111?style=flat-square)](#product)
+[![Live Product](https://img.shields.io/badge/Live-thrii.io-111111?style=flat-square)](https://www.thrii.io/) [![Local App](https://img.shields.io/badge/Stack-Vite%20%2B%20Vanilla%20JS-111111?style=flat-square)](#run-locally)
 
-> **Fewer, more relevant candidates. Faster hiring.**
+> **A local, production-style recreation of the current Thrii.io marketing experience.**
 
-[Thrii](https://www.thrii.io/) is a recruitment platform focused on helping Indian MSMEs hire faster through structured hiring workflows, relevant candidate matching, and recruiter-led validation.
-
-## Product
-
-Thrii is designed around a simple hiring problem: employers do not need more CV volume — they need a focused shortlist they can act on.
-
-The product proposition is centered on helping businesses receive **3 relevant, vetted candidate profiles within 72 hours**, subject to role requirements and candidate availability.
-
-### Core workflow
-
-```text
-Hiring requirement
-        ↓
-Role clarification
-        ↓
-Candidate matching
-        ↓
-Recruiter validation
-        ↓
-Focused shortlist
-        ↓
-Faster hiring decision
-```
-
-### Who it serves
-
-- Indian MSMEs and growing businesses
-- Employers hiring across multiple roles
-- Recruitment teams and recruiters
-- Businesses looking for an alternative to high-volume job-board workflows
-
-## Product journey
-
-Thrii is the clearest example of my **product + engineering** background working together.
-
-My work around the product has included:
-
-- Product discovery and requirement shaping
-- End-to-end **Product Development Life Cycle (PDLC)** coordination
-- Translating business requirements into product priorities and execution
-- Collaborating with engineering and contributing from a full-stack development background
-- Iterating on user workflows, positioning, and product experience
-- Supporting launch and go-to-market execution
-- **Product Hunt and G2 product listing / positioning**
-
-## Product principles
-
-**Relevance over volume**  
-Keep the hiring funnel focused instead of overwhelming employers with candidate volume.
-
-**Technology + human validation**  
-Use technology to improve matching and workflow efficiency while retaining recruiter validation where it matters.
-
-**Outcome-oriented workflows**  
-Design each step around moving an employer closer to a hiring decision.
+This repository contains the local frontend implementation for Thrii.io, based on the public site at https://www.thrii.io/. The current site presents Thrii as a structured recruitment workflow for employers, recruiters, analysts, and candidates.
 
 ## Product surface
 
-| Area | Focus |
-|---|---|
-| Hiring requirements | Structure the role and clarify what matters |
-| Candidate matching | Surface relevant candidate profiles |
-| Validation | Add recruiter-led quality checks |
-| Shortlisting | Reduce noise and decision overhead |
-| Go-to-market | Product positioning and launch execution |
+- Responsive Thrii.io landing page
+- Hero pipeline/dashboard visualization
+- Product capabilities grid
+- Hiring workflow from intake → match → review → offer
+- Core / Gold / Scale plan presentation
+- Demo and signup modal flows
+- Mobile navigation and responsive breakpoints
+- Footer contact/product navigation
 
-## Website
+## Run locally
 
-🌐 **https://www.thrii.io/**
+```bash
+npm install
+npm run dev
+```
 
-## About this repository
+Then open the local Vite URL shown in the terminal.
 
-This repository is the local development codebase for Thrii.io. Product, application, and website implementation may evolve independently from this documentation.
+## Production build
 
-> **Problem → Product → Build → Launch → Learn**
+```bash
+npm run build
+npm run preview
+```
+
+## Stack
+
+- Vite
+- Vanilla JavaScript
+- Semantic HTML
+- Responsive CSS
+- Google Fonts: Manrope + DM Mono
+
+## Product context
+
+Thrii is positioned around a simple hiring problem: employers do not need more CV volume — they need a focused shortlist they can act on. The public site describes structured job tickets, smart matching, multi-role workspaces, realtime analytics, enterprise security, and workflow automation.
+
+## Source
+
+Live reference: https://www.thrii.io/
+
+This repository recreates the public-facing experience; it does not copy or expose private backend systems, credentials, databases, or proprietary server-side logic.
