@@ -1,174 +1,347 @@
 # ThriiLocal
 
-### Product + engineering case study for Thrii.io
+### End-to-end hiring operations platform · MERN · Product + Cloud
 
-**ThriiLocal is the flagship repository in my product portfolio.** It documents the public-facing product experience I work around at Thrii from both a **Product Analyst** and technical product-builder perspective.
+**ThriiLocal is the flagship product system in my portfolio.** It models a complete ticket-based hiring operation from **customer purchase → admin assignment → JD creation → analyst approval → recruiter execution → 72-hour SLA → analyst review → customer delivery**.
 
-[![Live Product](https://img.shields.io/badge/Live-thrii.io-111111?style=flat-square)](https://www.thrii.io/) [![Product](https://img.shields.io/badge/Focus-Product%20Management-111111?style=flat-square)](#product-case-study) [![Stack](https://img.shields.io/badge/Stack-Vite%20%2B%20JavaScript-111111?style=flat-square)](#technical-scope)
+It is intentionally built as a **real full-stack product**, not just a landing page or UI prototype.
+
+[![Product](https://img.shields.io/badge/Product-End--to--End-111111?style=flat-square)](#product-workflow) [![Stack](https://img.shields.io/badge/Stack-MERN-111111?style=flat-square)](#architecture) [![SLA](https://img.shields.io/badge/Recruiter%20SLA-72h-111111?style=flat-square)](#-72-hour-sla) [![Live](https://img.shields.io/badge/Live-thrii.io-111111?style=flat-square)](https://www.thrii.io/)
 
 ---
 
-## Product case study
-
-### The problem
-
-Hiring teams can lose time moving between unstructured job requirements, candidate discovery, review and decision-making. Thrii's product direction is centered on making that workflow more structured and actionable.
-
-### Product surface
-
-The public experience includes:
-
-- Structured hiring/job intake
-- Candidate matching and discovery flows
-- Recruiter-oriented review workflows
-- Product capability and plan presentation
-- Interactive demo and signup experiences
-- Responsive web experience across device sizes
-
-### Product thinking
-
-I approach the product through the sequence:
+## Product workflow
 
 ```text
-User / Business Need
-        ↓
-Problem Definition
-        ↓
-Workflow + Requirements
-        ↓
-MVP Product Surface
-        ↓
-Technical Implementation
-        ↓
-Validation
-        ↓
-Feedback + Metrics
-        ↓
-Iteration
+CUSTOMER
+  │
+  ├── Register / Login
+  │
+  └── Purchase Hiring Ticket
+            │
+            ▼
+      SUPER ADMIN
+            │
+            └── Assign Analyst
+                    │
+                    ▼
+                 ANALYST
+                    │
+                    ├── Review Ticket
+                    └── Approve workflow
+                            │
+                            ▼
+                         USER
+                            │
+                            └── Create + Submit JD
+                                      │
+                                      ▼
+                                   ANALYST
+                                      │
+                                      ├── Approve JD
+                                      └── Assign Recruiter
+                                              │
+                                              ▼
+                                           RECRUITER
+                                              │
+                                              ├── Source candidates
+                                              ├── Build shortlist
+                                              └── Submit within 72h
+                                                      │
+                                                      ▼
+                                                   ANALYST
+                                                      │
+                                                      ├── Review
+                                                      ├── Approve / Revise
+                                                      └── Deliver
+                                                            │
+                                                            ▼
+                                                          USER
 ```
 
-The goal is not simply to reproduce screens. The goal is to make the **user journey, product decisions and trade-offs understandable**.
+The critical idea is that **the ticket is the product's source of truth**. Every role sees the work they own, every transition is permission-controlled, and important actions are auditable.
 
 ---
 
-## My role at Thrii
+## Why this is a serious product system
 
-I currently work as a **Product Analyst at Thrii**.
+ThriiLocal combines four layers:
 
-My broader product contribution includes working across product analysis, product workflows, user-facing experiences and go-to-market/product positioning. I have also worked on product listing and positioning across **G2, Product Hunt and Microsoft Azure ecosystem surfaces**.
+### 1. Commerce
 
-This repository represents the public implementation layer and is intentionally separated from Thrii's private backend systems, credentials, databases and proprietary server-side logic.
+Customer selects a hiring plan and purchases a ticket. Stripe Checkout can be enabled through environment configuration, while development mode supports local workflow testing.
+
+### 2. Workflow orchestration
+
+A ticket moves through explicit states rather than relying on informal communication:
+
+```text
+PAID
+  ↓
+ASSIGNED_ANALYST
+  ↓
+JD_SUBMITTED
+  ↓
+JD_APPROVED
+  ↓
+RECRUITER_ASSIGNED
+  ↓
+RECRUITER_WORKING
+  ↓
+RECRUITER_SUBMITTED
+  ↓
+ANALYST_REVIEW
+  ↓
+DELIVERED
+  ↓
+CLOSED
+```
+
+Revision paths are supported when work does not meet the required quality bar.
+
+### 3. Human operations
+
+The product creates clear ownership between **customer → super admin → analyst → recruiter → analyst → customer**.
+
+### 4. Measurement
+
+The workflow creates operational data that can be used to measure throughput, bottlenecks, SLA compliance and customer outcomes.
 
 ---
 
-## What this repository demonstrates
+## 👥 Role-based product experience
 
-### Product
+| Role | Primary responsibility | Key surface |
+|---|---|---|
+| **User** | Buy tickets, create JDs, receive outcomes | Customer workspace |
+| **Super Admin** | Assign, monitor, escalate | Operations control center |
+| **Analyst** | Quality gate + recruiter orchestration | Analyst workbench |
+| **Recruiter** | Candidate sourcing + delivery | Recruiter workspace |
 
-- User journey thinking
-- Workflow decomposition
-- Product surface definition
-- MVP-oriented scope
-- UX state thinking
-- Product positioning
-- Iteration mindset
-
-### Engineering
-
-- Responsive frontend implementation
-- Reusable UI patterns
-- Build and production validation
-- Local development workflow
-- Technical documentation
+Authorization is enforced server-side. The frontend is never treated as a security boundary.
 
 ---
 
-## Technical scope
+## ⏱️ 72-hour recruiter SLA
 
-- Vite
-- Vanilla JavaScript
-- Semantic HTML
-- Responsive CSS
-- Manrope + DM Mono
+The clock starts when an analyst assigns a recruiter.
 
-### Run locally
+```text
+ASSIGNMENT
+    │
+    ├──────── 48h ────────┐
+    │                     │
+    │                 WARNING
+    │                     │
+    ├──────── 60h ────────┤
+    │                     │
+    │                   AT RISK
+    │                     │
+    ├──────── 72h ────────┤
+    │                     │
+    │                  BREACHED
+    ▼
+DELIVERY
+```
+
+The API stores `slaStartedAt` and `slaDueAt`, allowing the product to calculate SLA state from timestamps instead of relying on manually updated labels.
+
+A production cloud deployment can run a scheduled worker to send warning and escalation notifications without requiring the dashboard to remain open.
+
+---
+
+## 🧾 Audit trail
+
+Every important transition creates an audit event.
+
+Example:
+
+```text
+10:02  Ticket purchased
+10:04  Analyst assigned
+10:21  JD submitted
+11:05  JD approved
+11:07  Recruiter assigned
+11:07  72h SLA started
++48h   SLA warning
++67h   Recruiter submitted shortlist
++68h   Analyst approved
++69h   Results delivered
+```
+
+This gives operations and product teams a shared timeline for investigating delays and improving the workflow.
+
+---
+
+## 📊 Product analytics
+
+The system is designed around measurable funnel and operational metrics:
+
+| Area | Metric |
+|---|---|
+| Commerce | Ticket purchase conversion |
+| Activation | Ticket → JD submission |
+| Quality | JD revision / approval rate |
+| Operations | Time to analyst assignment |
+| Recruiting | Time to recruiter assignment |
+| SLA | % recruiter submissions within 72h |
+| Output | Candidates submitted per ticket |
+| Delivery | Time to first shortlist |
+| Customer | Repeat ticket rate |
+
+These metrics can become the foundation for future dashboards and product prioritization.
+
+---
+
+## 🧠 Product decisions
+
+### Ticket-based ownership
+
+A purchased ticket creates a durable unit of work that can be assigned, tracked, audited and measured.
+
+### Analyst as quality gate
+
+The analyst separates customer requirements from recruiter execution, reducing the chance that an unclear JD reaches the recruiting workflow.
+
+### SLA as a product primitive
+
+Recruiter turnaround is a customer promise, so the deadline is represented as actual system data and exposed to operations.
+
+### Explicit state machine
+
+Making states and transitions explicit reduces ambiguity, improves reporting and makes automation possible.
+
+### Closed-loop delivery
+
+The recruiter does not directly become the final customer interface. The analyst reviews the output before delivery, creating a quality-control layer.
+
+---
+
+## 🏗️ Architecture
+
+```text
+                    THRIILOCAL
+                         │
+          ┌──────────────┴──────────────┐
+          │                             │
+      React Client                  Express API
+          │                             │
+      Role-based UI                JWT + RBAC
+          │                             │
+          └──────────────┬──────────────┘
+                         │
+                      MongoDB
+                         │
+             ┌───────────┼───────────┐
+             │           │           │
+           Users       Tickets    AuditLogs
+             │           │           │
+             └───────────┼───────────┘
+                         │
+                 Workflow / SLA
+                         │
+              ┌──────────┴──────────┐
+              │                     │
+           Stripe               Cloud ops
+          Checkout          CI/CD · health · logs
+```
+
+### Stack
+
+**Frontend:** React + TypeScript + Vite  
+**Backend:** Node.js + Express  
+**Database:** MongoDB + Mongoose  
+**Authentication:** JWT + bcrypt  
+**Payments:** Stripe Checkout integration  
+**Product analytics:** workflow events + audit trail  
+**Cloud:** environment-based deployment, health checks and CI/CD-ready structure
+
+---
+
+## ☁️ Cloud / operations layer
+
+The backend exposes a health endpoint:
+
+```text
+GET /health
+```
+
+and is structured for cloud deployment with:
+
+- environment-based secrets
+- MongoDB connection configuration
+- production/client origin configuration
+- health checks
+- deployment-safe configuration
+- API logging hooks
+- Stripe secret isolation
+- CI validation
+
+The goal is to demonstrate that a product continues to matter **after it has been deployed**.
+
+---
+
+## 🔐 Security model
+
+- Passwords are hashed with bcrypt.
+- JWTs carry role claims.
+- Role-based middleware protects workflow transitions.
+- Ticket ownership is checked server-side.
+- Secrets belong in environment variables.
+- Private Thrii systems and credentials are not committed.
+
+---
+
+## 📁 Repository structure
+
+```text
+client/                  React product interface
+server/
+  src/
+    models.js            MongoDB models
+    server.js            API + workflow orchestration
+docs/
+  product-system.md      Product lifecycle + state machine
+  api-contract.md        Backend contract
+.github/workflows/       CI / automation
+```
+
+---
+
+## 🚀 Run locally
+
+### Frontend
 
 ```bash
 npm install
 npm run dev
 ```
 
-### Production build
+### API
 
 ```bash
-npm run build
-npm run preview
+cd server
+npm install
+cp .env.example .env
+npm run dev
 ```
 
----
+Default API port: `4000`.
 
-## Product decisions worth discussing
-
-### 1. Reduce cognitive load
-
-Hiring workflows contain multiple decisions. The product surface should make the next useful action obvious rather than forcing users to interpret the interface themselves.
-
-### 2. Separate discovery from decision-making
-
-Finding candidates and evaluating candidates are different jobs. Product workflows should support both without turning the experience into an information dump.
-
-### 3. Make the product value legible quickly
-
-A recruiter evaluating a new platform needs to understand the value proposition before investing time in setup. This affects information hierarchy, demos, plan presentation and onboarding.
-
-### 4. Treat implementation as part of product quality
-
-Responsive behaviour, loading states, navigation, validation and error handling are product decisions because they directly affect whether the user can complete the intended job.
+See [`docs/product-system.md`](docs/product-system.md) for the full workflow and [`docs/api-contract.md`](docs/api-contract.md) for the API surface.
 
 ---
-
-## Success metrics I would track
-
-| Product area | Example metric |
-|---|---|
-| Job intake | Job creation completion rate |
-| Candidate discovery | Search → profile engagement |
-| Matching | Match-to-review rate |
-| Review workflow | Candidate review completion rate |
-| Activation | Time to first useful shortlist |
-| Retention | Active hiring teams / repeat workflows |
-| Commercial | Demo → signup / signup → activation |
-
-These are **proposed product metrics**, not claims about private Thrii production data.
-
----
-
-## What I would explore next
-
-- Identify the highest-friction step in the hiring workflow
-- Instrument the critical activation funnel
-- Segment behaviour by recruiter/team type
-- Test improvements to first-session activation
-- Compare matching quality with downstream review behaviour
-- Create a tighter feedback loop between customer conversations and product priorities
-
----
-
-## Repository scope
-
-This repository recreates and documents the **public-facing product experience**. It does not contain private backend systems, credentials, databases or proprietary server-side logic.
 
 ## Portfolio role
 
-**FLAGSHIP — Product + technical case study**
+**FLAGSHIP — Product Management + Full-Stack + Cloud case study**
 
-ThriiLocal is paired with [APIAtlas](https://github.com/Rrachet/apiatlas), [LaunchPad](https://github.com/Rrachet/LaunchPad) and [SupportHub](https://github.com/Rrachet/SupportHub) to demonstrate a broader product capability:
+ThriiLocal demonstrates the complete product loop:
 
-**Problem → Product → Engineering → Customer workflow → Measurement → Iteration**
+**Customer problem → commercial model → workflow design → requirements → engineering → operations → SLA → analytics → product improvement.**
 
----
+This is the project I would use to discuss **product ownership, technical judgment, prioritization, customer workflows, metrics and execution** in a PM interview.
 
-## Links
+## About the builder
 
-- [Live Thrii.io product](https://www.thrii.io/)
-- [GitHub portfolio](https://github.com/Rrachet)
+I currently work as a **Product Analyst at Thrii**, working across product analysis, workflows, product experience and go-to-market/product positioning. I have also worked on product listing and positioning across G2, Product Hunt and Microsoft Azure ecosystem surfaces.
