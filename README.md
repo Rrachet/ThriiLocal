@@ -1,23 +1,45 @@
 # ThriiLocal
 
-### Thrii.io — hiring, restructured
+### Production-style application implementation for Thrii.io
 
-[![Live Product](https://img.shields.io/badge/Live-thrii.io-111111?style=flat-square)](https://www.thrii.io/) [![Local App](https://img.shields.io/badge/Stack-Vite%20%2B%20Vanilla%20JS-111111?style=flat-square)](#run-locally)
+ThriiLocal is my flagship full-stack/product application repository, focused on building a usable software product and demonstrating the engineering discipline around **implementation, local operation, validation, troubleshooting, and documentation**.
 
-> **A local, production-style recreation of the current Thrii.io marketing experience.**
+[![Live Product](https://img.shields.io/badge/Live-thrii.io-111111?style=flat-square)](https://www.thrii.io/) [![Stack](https://img.shields.io/badge/Stack-Vite%20%2B%20Vanilla%20JS-111111?style=flat-square)](#stack)
 
-This repository contains the local frontend implementation for Thrii.io, based on the public site at https://www.thrii.io/. The current site presents Thrii as a structured recruitment workflow for employers, recruiters, analysts, and candidates.
+## Why this project matters
+
+This repository is part of a broader engineering portfolio built around three capabilities:
+
+**BUILD** → build a real application  
+**OPERATE** → understand application health, environments and failures  
+**SUPPORT** → troubleshoot issues, document resolutions and help users
+
+ThriiLocal demonstrates the first capability while serving as the application foundation for operational and support-focused work elsewhere in the portfolio.
 
 ## Product surface
 
-- Responsive Thrii.io landing page
-- Hero pipeline/dashboard visualization
-- Product capabilities grid
+- Responsive Thrii.io landing experience
 - Hiring workflow from intake → match → review → offer
-- Core / Gold / Scale plan presentation
-- Demo and signup modal flows
+- Product capabilities and plan presentation
+- Interactive demo and signup flows
 - Mobile navigation and responsive breakpoints
-- Footer contact/product navigation
+- Structured UI states and reusable frontend patterns
+
+## Engineering workflow
+
+```text
+Develop
+  ↓
+Run locally
+  ↓
+Build
+  ↓
+Validate
+  ↓
+Troubleshoot
+  ↓
+Document
+```
 
 ## Run locally
 
@@ -25,8 +47,6 @@ This repository contains the local frontend implementation for Thrii.io, based o
 npm install
 npm run dev
 ```
-
-Then open the local Vite URL shown in the terminal.
 
 ## Production build
 
@@ -41,14 +61,23 @@ npm run preview
 - Vanilla JavaScript
 - Semantic HTML
 - Responsive CSS
-- Google Fonts: Manrope + DM Mono
+- Manrope + DM Mono
 
 ## Product context
 
-Thrii is positioned around a simple hiring problem: employers do not need more CV volume — they need a focused shortlist they can act on. The public site describes structured job tickets, smart matching, multi-role workspaces, realtime analytics, enterprise security, and workflow automation.
+Thrii is positioned around helping employers move from unstructured hiring activity toward focused, actionable candidate shortlists. The public product experience includes structured job tickets, candidate matching, recruiter workflows, analytics and workflow automation.
 
-## Source
+## Repository scope
 
-Live reference: https://www.thrii.io/
+This repository recreates the public-facing product experience. It does **not** contain private backend systems, credentials, databases, or proprietary server-side logic.
 
-This repository recreates the public-facing experience; it does not copy or expose private backend systems, credentials, databases, or proprietary server-side logic.
+## Portfolio role
+
+**Build project — flagship application**
+
+This project is intentionally paired with [SupportHub](https://github.com/Rrachet/SupportHub), which demonstrates service-desk workflows, and [APIAtlas](https://github.com/Rrachet/apiatlas), which demonstrates API discovery, validation and health monitoring.
+
+## Links
+
+- [Live Thrii.io product](https://www.thrii.io/)
+- [GitHub portfolio](https://github.com/Rrachet)
